@@ -11,6 +11,20 @@ Keyboard-first agent navigation and naming for [Herdr](https://herdr.dev).
 
 Requires Herdr **0.9.0+** and Node.js **18+**. The plugin has no npm dependencies and currently supports macOS and Linux.
 
+## Demo
+
+The active-agent picker groups agents by Space, supports live filtering, and opens the selected agent's exact pane.
+
+![Active-agent picker grouped by Space](assets/active-agent-picker.png)
+
+`Ctrl+A Shift+A` opens a compact rename prompt for the focused agent.
+
+![Rename-agent prompt](assets/rename-agent.png)
+
+The resulting alias is rendered by Herdr's native Agents sidebar in place of the generic agent kind.
+
+![Native Agents sidebar showing an agent alias](assets/sidebar-agent-alias.png)
+
 ## Install
 
 From GitHub after publishing:
