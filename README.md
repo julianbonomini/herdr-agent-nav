@@ -48,14 +48,14 @@ Herdr plugins do not choose or modify your keybindings. Add one or both action b
 [[keys.command]]
 key = "prefix+shift+g"
 type = "shell"
-command = "herdr plugin action invoke herdr.power-tools.open-active-picker"
+command = "herdr plugin action invoke herdr.agent-nav.open-active-picker"
 description = "jump to active agent"
 
 # Rename the focused agent in Herdr's native Agents sidebar.
 [[keys.command]]
 key = "prefix+shift+a"
 type = "shell"
-command = "herdr plugin action invoke herdr.power-tools.open-rename"
+command = "herdr plugin action invoke herdr.agent-nav.open-rename"
 description = "rename focused agent"
 ```
 
@@ -65,7 +65,7 @@ The complete copy-ready example is in [`config.example.toml`](config.example.tom
 herdr server reload-config
 ```
 
-The `herdr.power-tools` portion of each command is the stable internal plugin ID; it remains correct even though the repository is named Herdr Agent Nav.
+The `herdr.agent-nav` portion of each command is the plugin's internal ID.
 
 ## Navigation behavior
 
@@ -88,13 +88,13 @@ Herdr's plugin v1 API can declare actions and terminal popups, but it cannot int
 ```sh
 npm test
 herdr plugin link "$(pwd)"
-herdr plugin action invoke herdr.power-tools.toggle-active-view
+herdr plugin action invoke herdr.agent-nav.toggle-active-view
 ```
 
 Inspect plugin command logs with:
 
 ```sh
-herdr plugin log list --plugin herdr.power-tools --limit 20
+herdr plugin log list --plugin herdr.agent-nav --limit 20
 ```
 
 ## Publishing

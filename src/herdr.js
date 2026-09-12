@@ -1,7 +1,7 @@
 import { spawnSync } from "node:child_process";
 import net from "node:net";
 
-export const ACTIVE_VIEW_SOURCE = "plugin:herdr.power-tools";
+export const ACTIVE_VIEW_SOURCE = "plugin:herdr.agent-nav";
 
 export function runHerdr(args) {
   const result = spawnSync(process.env.HERDR_BIN_PATH || "herdr", args, {

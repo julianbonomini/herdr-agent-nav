@@ -5,12 +5,12 @@
 [[keys.command]]
 key = "prefix+shift+g"
 type = "shell"
-command = "herdr plugin action invoke herdr.power-tools.open-active-picker"
+command = "herdr plugin action invoke herdr.agent-nav.open-active-picker"
 description = "jump to active agent"
 
 # Rename the focused agent in Herdr's native Agents sidebar.
 [[keys.command]]
 key = "prefix+shift+a"
 type = "shell"
-command = "herdr plugin action invoke herdr.power-tools.open-rename"
+command = "herdr plugin action invoke herdr.agent-nav.open-rename"
 description = "rename focused agent"
