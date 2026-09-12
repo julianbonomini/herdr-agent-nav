@@ -12,7 +12,7 @@ let message = "";
 function render() {
   process.stdout.write("\x1b[2J\x1b[H");
   process.stdout.write(`${c.title}Rename agent${c.reset}\n\n`);
-  process.stdout.write(`${value || `${c.dim}agent-name${c.reset}`}\x1b[7m \x1b[0m\n\n`);
+  process.stdout.write(`${value}\x1b[7m \x1b[0m\n\n`);
   process.stdout.write(`${c.accent} ↵ save ${c.reset}  ${c.dim}Ctrl+C clear${c.reset}  ${c.dim}Esc cancel${c.reset}\n`);
   if (message) process.stdout.write(`\n${c.error}${message}${c.reset}\n`);
 }
