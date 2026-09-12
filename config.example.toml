@@ -14,7 +14,7 @@ description = "toggle active agents"
 # description = "jump to active agent"
 
 [[keys.command]]
-key = "prefix+r"
+key = "prefix+shift+a"
 type = "shell"
 command = "herdr plugin action invoke herdr.power-tools.open-rename"
 description = "rename focused agent"

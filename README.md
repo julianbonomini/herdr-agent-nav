@@ -8,7 +8,7 @@ Opinionated, keyboard-first quality-of-life tools for [Herdr](https://herdr.dev)
 | --- | --- | --- |
 | Active-agent view | Toggles the built-in Agents sidebar to hide finished agents. This also scopes Herdr's next/previous and indexed agent navigation. | `prefix+g` |
 | Active-agent picker | Opens a keyboard picker containing only non-finished agents and navigates to their workspace and tab. | `prefix+g` (instead of the view toggle, if preferred) |
-| Rename current agent | Opens a small prompt and gives the focused agent a durable display name. | `prefix+r` |
+| Rename current agent | Opens a small prompt and gives the focused agent a durable display name. | `prefix+shift+a` |
 
 Requires Herdr **0.9.0+** and Node.js **18+**. The plugin has no npm dependencies and currently supports macOS and Linux.
 
