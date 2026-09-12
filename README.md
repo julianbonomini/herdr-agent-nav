@@ -21,7 +21,7 @@ The active-agent picker groups agents by Space, supports live filtering, and ope
 
 ![Rename-agent prompt](assets/rename-agent.png)
 
-`<Leader + Shift+G` The resulting alias is rendered by Herdr's native Agents sidebar in place of the generic agent kind.
+The resulting alias is rendered by Herdr's native Agents sidebar in place of the generic agent kind.
 
 ![Native Agents sidebar showing an agent alias](assets/sidebar-agent-alias.png)
 
@@ -39,7 +39,33 @@ For local development:
 herdr plugin link "$(pwd)"
 ```
 
-Then add the desired bindings from [`config.example.toml`](config.example.toml) to `~/.config/herdr/config.toml`, and reload Herdr's configuration.
+## Configure shortcuts
+
+Herdr plugins do not choose or modify your keybindings. Add one or both action blocks below to `~/.config/herdr/config.toml`, replacing the `key` values with shortcuts that fit your setup. `prefix` means the leader key configured under `[keys]`.
+
+```toml
+# Open the active-agent picker.
+[[keys.command]]
+key = "prefix+shift+g"
+type = "shell"
+command = "herdr plugin action invoke herdr.power-tools.open-active-picker"
+description = "jump to active agent"
+
+# Rename the focused agent in Herdr's native Agents sidebar.
+[[keys.command]]
+key = "prefix+shift+a"
+type = "shell"
+command = "herdr plugin action invoke herdr.power-tools.open-rename"
+description = "rename focused agent"
+```
+
+The complete copy-ready example is in [`config.example.toml`](config.example.toml). Reload after saving with your configured reload shortcut, or run:
+
+```sh
+herdr server reload-config
+```
+
+The `herdr.power-tools` portion of each command is the stable internal plugin ID; it remains correct even though the repository is named Herdr Agent Nav.
 
 ## Navigation behavior
 

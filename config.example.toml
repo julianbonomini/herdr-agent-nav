@@ -1,25 +1,16 @@
-# Add one of these to ~/.config/herdr/config.toml, then reload the config.
+# Add either or both of these to ~/.config/herdr/config.toml, then reload.
+# Replace the key values to fit your own Herdr configuration.
 
+# Open the active-agent picker.
 [[keys.command]]
 key = "prefix+shift+g"
 type = "shell"
-command = "herdr plugin action invoke herdr.power-tools.toggle-active-view"
-description = "toggle active agents"
+command = "herdr plugin action invoke herdr.power-tools.open-active-picker"
+description = "jump to active agent"
 
-# Alternative to the view toggle: open a keyboard picker of active agents.
-# [[keys.command]]
-# key = "prefix+shift+g"
-# type = "shell"
-# command = "herdr plugin action invoke herdr.power-tools.open-active-picker"
-# description = "jump to active agent"
-
+# Rename the focused agent in Herdr's native Agents sidebar.
 [[keys.command]]
 key = "prefix+shift+a"
 type = "shell"
 command = "herdr plugin action invoke herdr.power-tools.open-rename"
 description = "rename focused agent"
-
-[keys]
-previous_agent = "prefix+h"
-next_agent = "prefix+l"
-focus_agent = "prefix+alt+1..9"
