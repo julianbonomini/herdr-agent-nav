@@ -1,14 +1,14 @@
 # Add one of these to ~/.config/herdr/config.toml, then reload the config.
 
 [[keys.command]]
-key = "prefix+g"
+key = "prefix+shift+g"
 type = "shell"
 command = "herdr plugin action invoke herdr.power-tools.toggle-active-view"
 description = "toggle active agents"
 
 # Alternative to the view toggle: open a keyboard picker of active agents.
 # [[keys.command]]
-# key = "prefix+g"
+# key = "prefix+shift+g"
 # type = "shell"
 # command = "herdr plugin action invoke herdr.power-tools.open-active-picker"
 # description = "jump to active agent"

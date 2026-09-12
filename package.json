@@ -1,8 +1,8 @@
 {
-  "name": "herdr-power-tools",
+  "name": "herdr-agent-nav",
   "version": "0.1.0",
   "private": true,
-  "description": "Opinionated keyboard-first workflow tools for Herdr",
+  "description": "Keyboard-first agent navigation and naming for Herdr",
   "type": "module",
   "scripts": { "test": "node --test" },
   "engines": { "node": ">=18" }

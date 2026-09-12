@@ -1,5 +1,5 @@
 id = "herdr.power-tools"
-name = "Herdr Power Tools"
+name = "Herdr Agent Nav"
 version = "0.1.0"
 min_herdr_version = "0.9.0"
 description = "Opinionated keyboard-first agent navigation and naming tools."
