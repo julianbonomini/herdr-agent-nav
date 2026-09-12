@@ -7,9 +7,9 @@ export function location(agent) {
   return directory ? `${directory.split("/").filter(Boolean).at(-1) || directory} · ${agent.pane_id}` : agent.pane_id;
 }
 
-export function filterAgents(agents, query) {
+export function filterAgents(agents, query, spaceFor = (agent) => agent.workspace_id) {
   const needle = query.trim().toLocaleLowerCase();
   if (!needle) return agents;
-  return agents.filter((agent) => [displayName(agent), agent.agent, agent.agent_status, agent.pane_id, agent.cwd, agent.workspace_id]
+  return agents.filter((agent) => [displayName(agent), spaceFor(agent), agent.agent, agent.agent_status, agent.pane_id, agent.cwd, agent.workspace_id]
     .filter(Boolean).join(" ").toLocaleLowerCase().includes(needle));
 }

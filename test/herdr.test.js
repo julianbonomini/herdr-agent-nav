@@ -23,4 +23,5 @@ test("picker searches names, status, pane, and location", () => {
   assert.equal(location(agents[0]), "auth · w1:p1");
   assert.deepEqual(filterAgents(agents, "docs"), [agents[1]]);
   assert.deepEqual(filterAgents(agents, "working"), [agents[0]]);
+  assert.deepEqual(filterAgents(agents, "frontend", () => "frontend"), agents);
 });

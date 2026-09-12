@@ -12,6 +12,12 @@ const trim = (value, width) => value.length > width ? `${value.slice(0, Math.max
 let allAgents;
 try { allAgents = runHerdrJson(["agent", "list"]).agents.filter((agent) => agent.agent_status !== "done"); }
 catch (error) { console.error(`Unable to list agents: ${error.message}`); process.exit(1); }
+let workspaceLabels = new Map();
+try {
+  workspaceLabels = new Map(runHerdrJson(["workspace", "list"]).workspaces
+    .map((workspace) => [workspace.workspace_id, workspace.label]));
+} catch { /* Workspace IDs remain a useful fallback. */ }
+const space = (agent) => workspaceLabels.get(agent.workspace_id) || agent.workspace_id;
 
 let query = "";
 let selected = Math.max(0, allAgents.findIndex((agent) => agent.focused));
@@ -20,29 +26,40 @@ const rawMode = typeof process.stdin.setRawMode === "function";
 let isFocusing = false;
 
 function refreshVisible() {
-  visible = filterAgents(allAgents, query);
+  visible = filterAgents(allAgents, query, space);
   selected = Math.min(selected, Math.max(visible.length - 1, 0));
 }
 
 function render() {
   refreshVisible();
   const columns = process.stdout.columns || 100;
-  const nameWidth = Math.max(20, Math.min(42, Math.floor(columns * 0.38)));
+  const nameWidth = Math.max(18, Math.min(36, Math.floor(columns * 0.28)));
+  const spaceWidth = Math.max(14, Math.min(28, Math.floor(columns * 0.22)));
   const statusWidth = 9;
-  const locationWidth = Math.max(18, columns - nameWidth - statusWidth - 8);
+  const locationWidth = Math.max(14, columns - nameWidth - spaceWidth - statusWidth - 10);
   process.stdout.write("\x1b[2J\x1b[H");
-  process.stdout.write(`${c.blue}Active agents${c.reset}  ${c.dim}${allAgents.length} available${c.reset}\n`);
+  process.stdout.write(`${c.blue}Active agents${c.reset}\n`);
   process.stdout.write(`${c.dim}Search:${c.reset} ${query || `${c.gray}type to filter…${c.reset}`}\n`);
   process.stdout.write(`${c.dim}↑/↓ or j/k select  ·  Enter open tab  ·  Esc close${c.reset}\n\n`);
-  process.stdout.write(`${c.dim}  ${pad("AGENT", nameWidth)} ${pad("LOCATION", locationWidth)} STATUS${c.reset}\n`);
+  process.stdout.write(`${c.dim}  ${pad("AGENT", nameWidth)} ${pad("SPACE", spaceWidth)} ${pad("LOCATION", locationWidth)} STATUS${c.reset}\n`);
   if (!visible.length) return process.stdout.write(`\n  ${c.gray}No active agents match “${query}”.${c.reset}\n`);
-  visible.forEach((agent, index) => {
-    const name = pad(trim(displayName(agent), nameWidth), nameWidth);
-    const status = pad(agent.agent_status, statusWidth);
-    const place = trim(location(agent), locationWidth);
-    if (index === selected) process.stdout.write(`${c.selected}› ${name} ${pad(place, locationWidth)} ${status}${c.reset}\n`);
-    else process.stdout.write(`  ${name} ${c.dim}${pad(place, locationWidth)}${c.reset} ${statusColor[agent.agent_status] || c.gray}${status}${c.reset}\n`);
+  const groups = new Map();
+  visible.forEach((agent) => {
+    const group = space(agent);
+    groups.set(group, [...(groups.get(group) || []), agent]);
   });
+  for (const [spaceName, agents] of groups) {
+    process.stdout.write(`\n${c.blue}▾ ${spaceName}${c.reset} ${c.dim}(${agents.length})${c.reset}\n`);
+    agents.forEach((agent) => {
+      const index = visible.indexOf(agent);
+      const name = pad(trim(displayName(agent), nameWidth), nameWidth);
+      const spaceNameCell = pad(trim(space(agent), spaceWidth), spaceWidth);
+      const status = pad(agent.agent_status, statusWidth);
+      const place = trim(location(agent), locationWidth);
+      if (index === selected) process.stdout.write(`${c.selected}› ${name} ${spaceNameCell} ${pad(place, locationWidth)} ${status}${c.reset}\n`);
+      else process.stdout.write(`  ${name} ${c.dim}${spaceNameCell} ${pad(place, locationWidth)}${c.reset} ${statusColor[agent.agent_status] || c.gray}${status}${c.reset}\n`);
+    });
+  }
 }
 
 function restoreTerminal() {
