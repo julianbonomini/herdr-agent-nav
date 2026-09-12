@@ -17,11 +17,11 @@ The active-agent picker groups agents by Space, supports live filtering, and ope
 
 ![Active-agent picker grouped by Space](assets/active-agent-picker.png)
 
-`Ctrl+A Shift+A` opens a compact rename prompt for the focused agent.
+`<Leader> + Shift+A` opens a compact rename prompt for the focused agent.
 
 ![Rename-agent prompt](assets/rename-agent.png)
 
-The resulting alias is rendered by Herdr's native Agents sidebar in place of the generic agent kind.
+`<Leader + Shift+G` The resulting alias is rendered by Herdr's native Agents sidebar in place of the generic agent kind.
 
 ![Native Agents sidebar showing an agent alias](assets/sidebar-agent-alias.png)
 
